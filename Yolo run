@@ -1,0 +1,9 @@
+#lxterminal에서 2개 터미널을 적용하기 위해 yolo작동하는 python파일과 센서의python파일을 작동하도록 함.
+#lxterminal에서 yolo의 뒤 세팅코드가 실행되지 않아 python파일로 입력하여 작동
+
+import os, sys
+import time
+import subprocess
+
+terminnal_command_yolo = "cd /home/admin/yolov5 && python detect.py --source 0 --weights bestn.pt --conf 0.5 --img 416"
+os.system(terminnal_command_yolo)
