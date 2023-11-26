@@ -1,0 +1,15 @@
+    final LocationListener gpsLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            String provider = location.getProvider();  // 위치정보
+            double longitude = location.getLongitude(); // 위도
+            double latitude = location.getLatitude(); // 경도
+            double altitude = location.getAltitude(); // 고도
+            txtResult.setText("위치정보 : " + provider + "\n" + "위도 : " + longitude + "\n" + "경도 : " + latitude + "\n" + "고도 : " + altitude);
+        } public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        } public void onProviderEnabled(String provider) {
+
+        } public void onProviderDisabled(String provider) {
+
+        }
+    };
