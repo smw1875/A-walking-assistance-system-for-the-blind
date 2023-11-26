@@ -11,4 +11,5 @@
 빅데이터를 수집하기 위해 roboflow에서 데이터를 이용하였다.
 
 시연영상 : https://drive.google.com/file/d/1TlC7cMIVKmrJPa-Ag0m0J3gMlm-MROs8/view?usp=sharing
+
 보고서 : https://drive.google.com/file/d/1vvdGnlgtwbqmks4u5S7yBp1zQxbiPvrD/view?usp=sharing
