@@ -1,0 +1,62 @@
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+Trig1 = 23
+Echo1 = 24
+ZING = 19
+Trig2 = 15
+Echo2 = 14
+
+GPIO.setup(Trig1, GPIO.OUT)
+GPIO.setup(Echo1, GPIO.IN)
+GPIO.setup(Trig2, GPIO.OUT)
+GPIO.setup(Echo2, GPIO.IN)
+GPIO.setup(ZING, GPIO.OUT)
+
+pwm = GPIO.PWM(ZING, 100)
+
+GPIO.output(Trig1, False)
+GPIO.output(Trig2, False)
+print ("TRIG Reset")
+time.sleep(2)
+
+def notify_vibration(distance):
+	dis = distance/60
+	if dis <= 1:
+		dis = 1
+	intense = 100/dis
+	print("Vibe rate : %.1f " % intense)
+	pwm.start(intense)
+	time.sleep(1)
+	pwm.stop()
+	
+def getdistance(Echo, Trig):
+	GPIO.output(Trig, True)
+	time.sleep(0.00001)
+	GPIO.output(Trig, False)
+		
+	while GPIO.input(Echo) == 0:
+		start = time.time()
+			
+	while GPIO.input(Echo) == 1:
+		stop = time.time()
+			
+	time_interval = stop - start
+	return time_interval * 34300 / 2
+	
+try:
+	while True:
+		distance1 = getdistance(Echo1, Trig1)
+		distance2 = getdistance(Echo2, Trig2)
+		if distance1 <= 240 and distance2 <= 240:
+			notify_vibration((distance1+distance2)/2)
+		print ("Distance1 => %.1f cm" % distance1)
+		print ("Distance2 => %.1f cm" % distance2)
+		time.sleep(0.4)
+		
+except KeyboardInterrupt:
+	ser.close()
+	GPIO.cleanup()
